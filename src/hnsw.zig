@@ -522,6 +522,7 @@ pub fn HnswIndex(comptime dim: u32, comptime Dist: type) type {
 
         /// Compute per-dimension min/range and quantize all vectors to u8.
         pub fn calibrateAndQuantize(self: *Self) void {
+            @setEvalBranchQuota(dim * 20);
             const n = self.num_nodes;
             if (n == 0) return;
 
